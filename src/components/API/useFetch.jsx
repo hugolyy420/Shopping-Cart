@@ -21,6 +21,7 @@ export const useFetch = (url) => {
         }));
         setIsLoading(false);
         setProducts(formattedJson);
+        // setFilteredProducts(formattedJson);
         setError(null);
       } catch (error) {
         setError(`${error} Could not Fetch Data `);
