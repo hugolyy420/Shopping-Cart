@@ -1,4 +1,4 @@
-const Categories = ({ categories, filterProducts, active, setActive }) => {
+const Categories = ({ categories, setCategory, active, setActive }) => {
   return (
     <ul>
       {categories.map((category, index) => (
@@ -7,7 +7,7 @@ const Categories = ({ categories, filterProducts, active, setActive }) => {
             type="button"
             className={`p-2 hover:bg-slate-400 w-full text-left ${active === index ? 'bg-slate-400' : ''}`}
             onClick={() => {
-              filterProducts(category);
+              setCategory(category);
               setActive(index);
             }}>
             {category}

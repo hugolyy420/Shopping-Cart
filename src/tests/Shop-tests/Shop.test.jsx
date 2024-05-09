@@ -5,8 +5,6 @@ import mockData from '../Mock-data/mock-data';
 import userEvent from '@testing-library/user-event';
 import { vi } from 'vitest';
 
-const categories = mockData.map((data) => data.category);
-
 vi.mock('../../components/API/useFetch', () => ({
   useFetch: () => ({
     products: mockData,
@@ -51,5 +49,15 @@ describe('Shop', () => {
     const clearFilterButton = await screen.findByRole('button', { name: /Clear Category/i });
     await user.click(clearFilterButton);
     expect(screen.getAllByRole('img').length).toBe(3);
+  });
+
+  it('sorts products according to rating', async () => {
+    render(
+      <BrowserRouter>
+        <Shop />
+      </BrowserRouter>
+    );
+    const cards = await screen.findAllByRole('img');
+    expect(cards[0].src).toContain(mockData[2].thumbnail);
   });
 });

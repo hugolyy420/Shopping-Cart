@@ -19,7 +19,7 @@ describe('Card', () => {
     const cardButton = screen.getByRole('button', { name: /Add to Cart/i });
     expect(cardImage.src).toContain(mockObj.thumbnail);
     expect(cardName.textContent).toBe(mockObj.title);
-    expect(Number(cardPrice.textContent)).toBe(mockObj.price);
+    expect(cardPrice.textContent).toBe(`$${mockObj.price}`);
     expect(Number(cardRating.textContent)).toBe(mockObj.rating);
     expect(cardButton).toBeInTheDocument();
   });

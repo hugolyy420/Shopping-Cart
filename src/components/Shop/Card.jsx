@@ -11,7 +11,7 @@ const Card = ({ thumbnail, title, price, rating }) => {
       <div className="flex-1">
         <Link>
           <h3>{title}</h3>
-          <p>{price}</p>
+          <p>${price}</p>
           <p>{rating}</p>
         </Link>
       </div>

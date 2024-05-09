@@ -5,11 +5,12 @@ import { useEffect, useState } from 'react';
 
 export const Shop = () => {
   const [url, setUrl] = useState('https://dummyjson.com/products?limit=0');
-  const [categories, setCategories] = useState([]);
-  const [active, setActive] = useState();
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const { products, isLoading, error } = useFetch(url);
-  console.log(active);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [category, setCategory] = useState();
+  const [active, setActive] = useState();
+  const [sortType, setSoryType] = useState('rating');
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -20,14 +21,45 @@ export const Shop = () => {
     fetchCategories();
   }, []);
 
-  const filterProducts = (category) => {
-    const temp = products.filter((product) => product.category === category);
-    setFilteredProducts(temp);
-  };
+  useEffect(() => {
+    const sortFunctions = {
+      rating: (products) => products.sort((a, b) => b.rating - a.rating),
+      'asc-alpha': (products) => products.sort((a, b) => a.title.localeCompare(b.title)),
+      'des-alpha': (products) => products.sort((a, b) => b.title.localeCompare(a.title)),
+      asc: (products) => products.sort((a, b) => a.price - b.price),
+      des: (products) => products.sort((a, b) => b.price - a.price)
+    };
+    if (products && !category) {
+      const sortedProducts = sortFunctions[sortType]([...products]);
+      setFilteredProducts(sortedProducts);
+    }
+    if (products && category) {
+      const temp = products.filter((product) => product.category === category);
+      const sortedProducts = sortFunctions[sortType](temp);
+      setFilteredProducts(sortedProducts);
+    }
+  }, [products, sortType, category]);
+
+  // useEffect(() => {
+
+  //   const sortProducts = (type) => {
+  //     if (sortFunctions[type]) {
+  //       const sortedProducts = [...filteredProducts];
+  //       setFilteredProducts((sortedProducts));
+  //     }
+  //   };
+
+  //   // sortProducts(sortType);
+  // }, [sortType]);
+
+  // const filterProducts = (category) => {
+  //   const temp = products.filter((product) => product.category === category);
+  //   setFilteredProducts(temp);
+  // };
 
   const clearCategory = () => {
     setActive();
-    setFilteredProducts([]);
+    setCategory();
   };
 
   return (
@@ -50,7 +82,7 @@ export const Shop = () => {
               )}
               <Categories
                 categories={categories}
-                filterProducts={filterProducts}
+                setCategory={setCategory}
                 active={active}
                 setActive={setActive}
               />
@@ -58,17 +90,17 @@ export const Shop = () => {
             <div>
               <label htmlFor="sorting">
                 Sort By:
-                <select name="sorting" id="sotring">
-                  <option value="recommended">Recommended</option>
-                  <option value="recommended">Alphabetical: A-Z</option>
-                  <option value="recommended">Alphabetical: Z-A</option>
-                  <option value="recommended">Price: Low to High</option>
-                  <option value="recommended">Price: High to Low</option>
+                <select name="sorting" id="sorting" onChange={(e) => setSoryType(e.target.value)}>
+                  <option value="rating">Recommended</option>
+                  <option value="asc-alpha">Alphabetical: A-Z</option>
+                  <option value="des-alpha">Alphabetical: Z-A</option>
+                  <option value="asc">Price: Low to High</option>
+                  <option value="des">Price: High to Low</option>
                 </select>
               </label>
 
               <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-lg">
-                {(filteredProducts.length > 0 ? filteredProducts : products)?.map((card) => (
+                {filteredProducts?.map((card) => (
                   <Card key={card.id} {...card} />
                 ))}
               </div>
