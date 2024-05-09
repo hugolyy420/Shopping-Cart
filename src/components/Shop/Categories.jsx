@@ -1,4 +1,4 @@
-const Categories = ({ categories, setCategory, active, setActive }) => {
+const Categories = ({ categories, setCategory, active, setActive, setItemOffset }) => {
   return (
     <ul>
       {categories.map((category, index) => (
@@ -9,6 +9,7 @@ const Categories = ({ categories, setCategory, active, setActive }) => {
             onClick={() => {
               setCategory(category);
               setActive(index);
+              setItemOffset(0);
             }}>
             {category}
           </button>

@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       <Header />
-      <main className="max-w-screen-xl flex w-full flex-col p-8">
+      <main className="max-w-screen-xl flex w-full flex-col p-8 mx-auto">
         <Outlet />
       </main>
     </>
