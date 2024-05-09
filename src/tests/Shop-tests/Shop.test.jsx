@@ -1,5 +1,4 @@
 import { Shop } from '../../components/Shop/Shop';
-import Categories from '../../components/Shop/Categories';
 import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import mockData from '../Mock-data/mock-data';
@@ -27,16 +26,30 @@ describe('Shop', () => {
     expect(cards.length).toBe(3);
   });
 
-  it('filters products based on category', async () => {
+  it('filters products according to category', async () => {
     const user = userEvent.setup();
-    const filterProducts = vi.fn();
     render(
       <BrowserRouter>
-        <Categories filterProducts={filterProducts} categories={categories} />
+        <Shop />
       </BrowserRouter>
     );
     const filterButton = await screen.findByRole('button', { name: /smartphones/i });
     await user.click(filterButton);
-    expect(filterProducts).toHaveBeenCalled();
+    expect(screen.getAllByRole('img').length).toBe(1);
+  });
+
+  it('clears category onclick', async () => {
+    const user = userEvent.setup();
+    render(
+      <BrowserRouter>
+        <Shop />
+      </BrowserRouter>
+    );
+    const filterButton = await screen.findByRole('button', { name: /smartphones/i });
+    await user.click(filterButton);
+    expect(screen.getAllByRole('img').length).toBe(1);
+    const clearFilterButton = await screen.findByRole('button', { name: /Clear Category/i });
+    await user.click(clearFilterButton);
+    expect(screen.getAllByRole('img').length).toBe(3);
   });
 });
