@@ -1,17 +1,24 @@
 import Categories from './Categories';
-import Pagination from './Pagination';
 import { useFetch } from '../API/useFetch';
 import { useEffect, useState } from 'react';
+import { useLocation, useParams } from 'react-router-dom';
+import Pagination from './Pagination';
+import { Link } from 'react-router-dom';
 
 export const Shop = () => {
-  const [url, setUrl] = useState('https://dummyjson.com/products?limit=0');
+  const { category } = useParams();
+  const { state } = useLocation();
+  let url;
+  if (!category) url = 'https://dummyjson.com/products?limit=0';
+  else url = `https://dummyjson.com/products/category/${category}`;
   const { products, isLoading, error } = useFetch(url);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categories, setCategories] = useState([]);
-  const [category, setCategory] = useState();
-  const [active, setActive] = useState();
-  const [sortType, setSoryType] = useState('rating');
+  const [active, setActive] = useState(category);
+  const [sortType, setSortType] = useState('rating');
   const [itemOffset, setItemOffset] = useState(0);
+  const currentSortType = sortType;
+  console.log(products);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -32,10 +39,11 @@ export const Shop = () => {
     };
     if (products && !category) {
       const sortedProducts = sortFunctions[sortType]([...products]);
+      setActive(category);
       setFilteredProducts(sortedProducts);
     }
     if (products && category) {
-      const temp = products.filter((product) => product.category === category);
+      const temp = [...products];
       const sortedProducts = sortFunctions[sortType](temp);
       setFilteredProducts(sortedProducts);
     }
@@ -43,7 +51,6 @@ export const Shop = () => {
 
   const clearCategory = () => {
     setActive();
-    setCategory();
     setItemOffset(0);
   };
 
@@ -58,25 +65,30 @@ export const Shop = () => {
             <div className="w-full max-w-56">
               <h3 className="text-2xl mb-2">Category</h3>
               {active !== undefined && (
-                <button
-                  className="p-2 my-2 hover:bg-red-400 w-full text-left bg-red-700 text-slate-50"
-                  type="button"
-                  onClick={clearCategory}>
+                <Link
+                  className="p-2 my-2 block hover:bg-red-400 w-full text-left bg-red-700 text-slate-50"
+                  state={{ sortType }}
+                  onClick={clearCategory}
+                  to="/shop">
                   Clear Category
-                </button>
+                </Link>
               )}
               <Categories
                 categories={categories}
-                setCategory={setCategory}
                 active={active}
                 setActive={setActive}
                 setItemOffset={setItemOffset}
+                sortType={sortType}
               />
             </div>
             <div className="flex flex-col gap-4">
               <label htmlFor="sorting" className="self-end border-2 p-2">
                 Sort By:
-                <select name="sorting" id="sorting" onChange={(e) => setSoryType(e.target.value)}>
+                <select
+                  value={state ? currentSortType : sortType}
+                  name="sorting"
+                  id="sorting"
+                  onChange={(e) => setSortType(e.target.value)}>
                   <option value="rating">Recommended</option>
                   <option value="asc-alpha">Alphabetical: A-Z</option>
                   <option value="des-alpha">Alphabetical: Z-A</option>
@@ -84,11 +96,22 @@ export const Shop = () => {
                   <option value="des">Price: High to Low</option>
                 </select>
               </label>
+              {/* <Outlet
+                context={{
+                  itemsPerPage: 18,
+                  filteredProducts,
+                  itemOffset,
+                  categories,
+                  setItemOffset,
+                  sortType
+                }}
+              /> */}
               <Pagination
                 itemsPerPage={18}
                 filteredProducts={filteredProducts}
                 itemOffset={itemOffset}
                 setItemOffset={setItemOffset}
+                sortType={sortType}
               />
             </div>
           </>

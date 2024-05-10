@@ -15,12 +15,9 @@ export const useFetch = (url) => {
         });
         if (!response.ok) throw new Error(response.statusText);
         const json = await response.json();
-        const formattedJson = json.products.map((item) => ({
-          ...item,
-          id: uuidv4()
-        }));
         setIsLoading(false);
-        setProducts(formattedJson);
+        if (json.products) setProducts(json.products);
+        else setProducts(json);
         // setFilteredProducts(formattedJson);
         setError(null);
       } catch (error) {

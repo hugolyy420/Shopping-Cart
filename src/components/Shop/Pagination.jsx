@@ -20,7 +20,7 @@ const Pagination = ({ filteredProducts, itemsPerPage, setItemOffset, itemOffset 
     <>
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-lg">
         {currentProducts?.map((product) => (
-          <Card key={product.id} {...product} />
+          <Card key={product.id} product={product} />
         ))}
       </div>
 

@@ -1,9 +1,28 @@
-const Categories = ({ categories, setCategory, active, setActive, setItemOffset }) => {
+import { Link } from 'react-router-dom';
+
+const Categories = ({
+  categories,
+  setCurrentCategory,
+  active,
+  setActive,
+  setItemOffset,
+  sortType
+}) => {
   return (
     <ul>
       {categories.map((category, index) => (
         <li key={index}>
-          <button
+          <Link
+            to={`/shop/${category}`}
+            state={{ sortType: sortType, active: active }}
+            className={`p-2 hover:bg-slate-400 block text-left ${active === category ? 'bg-slate-400' : ''}`}
+            onClick={() => {
+              setActive(category);
+              setItemOffset(0);
+            }}>
+            {category}
+          </Link>
+          {/* <button
             type="button"
             className={`p-2 hover:bg-slate-400 w-full text-left ${active === index ? 'bg-slate-400' : ''}`}
             onClick={() => {
@@ -12,7 +31,7 @@ const Categories = ({ categories, setCategory, active, setActive, setItemOffset 
               setItemOffset(0);
             }}>
             {category}
-          </button>
+          </button> */}
         </li>
       ))}
     </ul>

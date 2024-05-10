@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import './App.css';
 import { Header } from './components/Header/Header';
-import { useFetch } from './components/API/useFetch';
+import './components/Carousel/embla.css';
 
 function App() {
   return (

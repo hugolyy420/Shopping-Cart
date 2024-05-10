@@ -40,4 +40,13 @@ describe('Header', () => {
     );
     expect(screen.getByRole('link', { name: 'Shop' })).toBeInTheDocument();
   });
+
+  it('renders a cart link', () => {
+    render(
+      <BrowserRouter>
+        <Header />
+      </BrowserRouter>
+    );
+    expect(screen.getByLabelText('Open Cart')).toBeInTheDocument();
+  });
 });
