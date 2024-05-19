@@ -16,7 +16,8 @@ const mockData = [
       'https://cdn.dummyjson.com/product-images/1/3.jpg',
       'https://cdn.dummyjson.com/product-images/1/4.jpg',
       'https://cdn.dummyjson.com/product-images/1/thumbnail.jpg'
-    ]
+    ],
+    quantity: 2
   },
   {
     id: 10,
@@ -35,7 +36,8 @@ const mockData = [
       'https://cdn.dummyjson.com/product-images/10/2.jpg',
       'https://cdn.dummyjson.com/product-images/10/3.jpg',
       'https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg'
-    ]
+    ],
+    quantity: 3
   },
   {
     id: 16,
@@ -55,7 +57,8 @@ const mockData = [
       'https://cdn.dummyjson.com/product-images/16/3.jpg',
       'https://cdn.dummyjson.com/product-images/16/4.jpg',
       'https://cdn.dummyjson.com/product-images/16/thumbnail.jpg'
-    ]
+    ],
+    quantity: 2
   }
 ];
 

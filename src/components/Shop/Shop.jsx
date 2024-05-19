@@ -1,13 +1,12 @@
 import Categories from './Categories';
 import { useFetch } from '../API/useFetch';
 import { useEffect, useState } from 'react';
-import { useLocation, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import Pagination from './Pagination';
 import { Link } from 'react-router-dom';
 
 export const Shop = () => {
   const { category } = useParams();
-  const { state } = useLocation();
   let url;
   if (!category) url = 'https://dummyjson.com/products?limit=0';
   else url = `https://dummyjson.com/products/category/${category}`;
@@ -18,7 +17,6 @@ export const Shop = () => {
   const [sortType, setSortType] = useState('rating');
   const [itemOffset, setItemOffset] = useState(0);
   const currentSortType = sortType;
-  console.log(products);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -55,19 +53,18 @@ export const Shop = () => {
   };
 
   return (
-    <>
-      <h2 className="text-4xl mb-6">Shop</h2>
-      <section className="max-w-screen-xl w-full flex gap-8">
-        {isLoading && <div>Loading ...</div>}
-        {error && <div>{error}</div>}
-        {!isLoading && (
-          <>
-            <div className="w-full max-w-56">
+    <section className="w-full flex flex-col items-center p-12">
+      {isLoading && <div>Loading ...</div>}
+      {error && <div>{error}</div>}
+      {!isLoading && (
+        <div className="max-w-screen-xl">
+          <h2 className="text-4xl font-bold mb-6">Shop</h2>
+          <div className="max-w-screen-xl w-full flex flex-col md:flex-row gap-8">
+            <div className="w-full md:max-w-56">
               <h3 className="text-2xl mb-2">Category</h3>
               {active !== undefined && (
                 <Link
-                  className="p-2 my-2 block hover:bg-red-400 w-full text-left bg-red-700 text-slate-50"
-                  state={{ sortType }}
+                  className="p-2 my-2 block hover:bg-red-400 w-full text-center bg-red-700 text-slate-50"
                   onClick={clearCategory}
                   to="/shop">
                   Clear Category
@@ -78,14 +75,13 @@ export const Shop = () => {
                 active={active}
                 setActive={setActive}
                 setItemOffset={setItemOffset}
-                sortType={sortType}
               />
             </div>
             <div className="flex flex-col gap-4">
               <label htmlFor="sorting" className="self-end border-2 p-2">
                 Sort By:
                 <select
-                  value={state ? currentSortType : sortType}
+                  value={currentSortType}
                   name="sorting"
                   id="sorting"
                   onChange={(e) => setSortType(e.target.value)}>
@@ -114,9 +110,9 @@ export const Shop = () => {
                 sortType={sortType}
               />
             </div>
-          </>
-        )}
-      </section>
-    </>
+          </div>
+        </div>
+      )}
+    </section>
   );
 };

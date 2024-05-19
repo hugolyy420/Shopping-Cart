@@ -2,14 +2,10 @@ import { Link } from 'react-router-dom';
 
 const Card = ({ product }) => {
   return (
-    <Link
-      to={`/product/${product.id}`}
-      state={{ ...product }}
-      className="shadow-md p-8 flex flex-col gap-2 items">
-      <div className="max-w-48 max-h-48 w-full self-center">
-        <img src={product.thumbnail} alt="Product image" className="w-full h-48 object-cover" />
+    <Link to={`/product/${product.id}`} className="shadow-md p-8 flex flex-col gap-2 items-start">
+      <div className="w-48 md:w-full h-48 self-center">
+        <img src={product.thumbnail} alt="Product image" className="w-full h-full object-cover" />
       </div>
-
       <h3 className="text-lg font-medium">{product.title}</h3>
       <p className="flex-1 flex items-center">
         {' '}

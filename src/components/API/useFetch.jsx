@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
 export const useFetch = (url) => {
   const [products, setProducts] = useState(null);
@@ -18,7 +17,6 @@ export const useFetch = (url) => {
         setIsLoading(false);
         if (json.products) setProducts(json.products);
         else setProducts(json);
-        // setFilteredProducts(formattedJson);
         setError(null);
       } catch (error) {
         setError(`${error} Could not Fetch Data `);

@@ -3,21 +3,54 @@ import { BrowserRouter } from 'react-router-dom';
 import mockData from '../Mock-data/mock-data';
 import Product from '../../components/Shop/Product';
 import { vi } from 'vitest';
+import userEvent from '@testing-library/user-event';
+import React from 'react';
 
-vi.mock('react-router-dom', async () => {
-  const mod = await vi.importActual('react-router-dom');
+vi.mock('react-router-dom', async (importOriginal) => {
+  const mod = await importOriginal();
   return {
     ...mod,
-    useLocation: () => ({
-      state: mockData[0]
-    }),
     useParams: () => ({
       id: mockData[0].id
+    }),
+    useOutletContext: () => ({
+      cartItems: [],
+      setCartItems: vi.fn()
     })
   };
 });
 
+vi.mock('../API/useFetch', () => {
+  return {
+    products: mockData[0],
+    isLoading: false,
+    error: null
+  };
+});
+
+vi.mock('../Carousel/Emblacarousel', () => ({
+  __esModule: true,
+  default: ({ images }) => (
+    <div>
+      {images.map((src, index) => (
+        <img key={index} src={src} alt={`Slide ${index + 1}`} />
+      ))}
+    </div>
+  )
+}));
+
 describe('Product', () => {
+  beforeAll(() => {
+    // Mock React useState and useEffect
+    const setSlidesMock = vi.fn();
+    vi.spyOn(React, 'useState').mockImplementation((initial) => [initial, setSlidesMock]);
+    vi.spyOn(React, 'useEffect').mockImplementation((fn) => fn());
+  });
+
+  afterAll(() => {
+    vi.restoreAllMocks();
+  });
+
   it('renders product details', () => {
     render(
       <BrowserRouter>
@@ -38,5 +71,15 @@ describe('Product', () => {
     expect(productDescription).toBeInTheDocument();
     expect(AddToCartButton).toBeInTheDocument();
     expect(BackLink).toBeInTheDocument();
+  });
+
+  it('add item to cart', () => {
+    const user = userEvent.setup();
+    render(
+      <BrowserRouter>
+        <Product />
+      </BrowserRouter>
+    );
+    const AddToCartButton = screen.getByRole('button', { name: /Add to Cart/i });
   });
 });

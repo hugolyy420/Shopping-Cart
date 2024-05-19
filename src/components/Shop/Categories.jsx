@@ -1,20 +1,12 @@
 import { Link } from 'react-router-dom';
 
-const Categories = ({
-  categories,
-  setCurrentCategory,
-  active,
-  setActive,
-  setItemOffset,
-  sortType
-}) => {
+const Categories = ({ categories, active, setActive, setItemOffset }) => {
   return (
-    <ul>
+    <ul className="grid grid-cols-3 md:grid-cols-1 gap-4">
       {categories.map((category, index) => (
         <li key={index}>
           <Link
             to={`/shop/${category}`}
-            state={{ sortType: sortType, active: active }}
             className={`p-2 hover:bg-slate-400 block text-left ${active === category ? 'bg-slate-400' : ''}`}
             onClick={() => {
               setActive(category);
