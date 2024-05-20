@@ -66,7 +66,7 @@ const Cart = () => {
   };
 
   return (
-    <section className="max-w-screen-xl mx-auto p-12 md:p-24 min-h-screen">
+    <section className="max-w-screen-xl mx-auto p-12 md:p-24 ">
       {cartItems.length === 0 ? (
         <div className="flex flex-col items-center gap-10 md:flex-row">
           <div className="flex flex-col">
