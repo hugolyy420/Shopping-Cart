@@ -66,7 +66,7 @@ const Cart = () => {
   };
 
   return (
-    <section className="max-w-screen-xl mx-auto p-8 min-h-screen">
+    <section className="max-w-screen-xl mx-auto p-12 md:p-24 min-h-screen">
       {cartItems.length === 0 ? (
         <div className="flex flex-col items-center gap-10 md:flex-row">
           <div className="flex flex-col">
@@ -90,7 +90,7 @@ const Cart = () => {
                 {cartItems.map((item) => (
                   <li
                     key={item.id}
-                    className="grid justify-around grid-cols-3 items-center  justify-items-center gap-10  md:grid-cols-5 ">
+                    className="grid justify-around grid-cols-3 items-center justify-items-center gap-10 md:grid-cols-5">
                     <Link to={`/product/${item.id}`}>
                       <div className="size-24 md:size-36">
                         <img
@@ -100,7 +100,6 @@ const Cart = () => {
                         />
                       </div>
                     </Link>
-
                     <h2>{item.title}</h2>
                     <p data-testid="price">${item.price}</p>
                     <div className="border-2 justify-self-center">

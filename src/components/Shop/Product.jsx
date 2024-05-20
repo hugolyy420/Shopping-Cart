@@ -13,6 +13,10 @@ const Product = () => {
   const OPTIONS = {};
 
   useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
+  useEffect(() => {
     if (!products) return;
     if (products) {
       const slideCount = products.images.length;
