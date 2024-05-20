@@ -26,11 +26,11 @@ const Pagination = ({ filteredProducts, itemsPerPage, setItemOffset, itemOffset 
 
       <ReactPaginate
         breakLabel="..."
-        nextLabel="next >"
+        nextLabel="next"
         onPageChange={handlePageClick}
         pageRangeDisplayed={3}
         pageCount={pageCount}
-        previousLabel="< previous"
+        previousLabel="previous"
         renderOnZeroPageCount={null}
         containerClassName="flex gap-4 w-full justify-center"
         pageClassName="flex items-center border-2 hover:bg-slate-300"
