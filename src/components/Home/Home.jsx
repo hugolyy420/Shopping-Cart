@@ -73,7 +73,7 @@ export const Home = () => {
           <section className="w-full flex flex-col items-center">
             <div className="max-w-screen-xl flex flex-col items-center gap-20 p-24">
               <h2 className="text-3xl font-bold">Hot Selling Devices</h2>
-              <div className="flex flex-col items-center gap-8 md:grid md:grid-cols-2 lg:grid-cols-4 lg:items-stretch">
+              <div className="flex flex-col items-stretch gap-8 md:grid lg:grid-cols-2 xl:grid-cols-4 lg:items-stretch">
                 {products.map((product) => (
                   <Card key={product.id} product={product} />
                 ))}

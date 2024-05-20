@@ -18,7 +18,7 @@ const Pagination = ({ filteredProducts, itemsPerPage, setItemOffset, itemOffset 
 
   return (
     <>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-screen-lg">
+      <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 max-w-screen-lg">
         {currentProducts?.map((product) => (
           <Card key={product.id} product={product} />
         ))}

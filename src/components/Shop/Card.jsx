@@ -5,7 +5,7 @@ const Card = ({ product }) => {
     <Link
       to={`/product/${product.id}`}
       className="p-8 flex flex-col gap-2 items-start border-4 rounded-lg hover:border-sky-800 transition-colors">
-      <div className="w-48 md:w-full h-48 self-center">
+      <div className="w-full h-48 self-center">
         <img src={product.thumbnail} alt="Product image" className="w-full h-full object-cover" />
       </div>
       <h3 className="text-lg font-medium">{product.title}</h3>
