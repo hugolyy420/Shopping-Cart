@@ -5,7 +5,7 @@ const Footer = () => {
   return (
     <footer className="w-full flex flex-col items-center bg-slate-200">
       <div className="p-36 w-full max-w-screen-xl flex flex-col items-start md:items-center gap-12 justify-between lg:flex-row">
-        <div className="flex flex-col gap-4 w-72 lg:mr-20">
+        <div className="flex flex-col gap-4 max-w-72 lg:mr-20">
           <h3 className="text-2xl font-bold">We Strive For The Best</h3>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Distinctio temporibus delectus
