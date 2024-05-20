@@ -22,10 +22,10 @@ describe('Cart', () => {
         <Cart />
       </BrowserRouter>
     );
-    expect(screen.getAllByRole('heading', { level: 2 }).length).toBe(1);
+    expect(screen.getAllByRole('heading', { level: 2 }).length).toBe(2);
     expect(screen.getAllByRole('img').length).toBe(1);
     expect(screen.getAllByTestId('price').length).toBe(1);
-    expect(screen.getAllByRole('textbox').length).toBe(1);
+    expect(screen.getAllByRole('spinbutton').length).toBe(1);
     expect(screen.getAllByRole('button', { name: '+' }).length).toBe(1);
     expect(screen.getAllByRole('button', { name: '-' }).length).toBe(1);
   });
@@ -45,7 +45,7 @@ describe('Cart', () => {
         <Cart />
       </BrowserRouter>
     );
-    const result = screen.getAllByRole('textbox').map((item) => item.value);
+    const result = screen.getAllByRole('spinbutton').map((item) => item.value);
     expect(result).toStrictEqual(['2']);
   });
 });

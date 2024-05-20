@@ -9,7 +9,7 @@ describe('Card', () => {
   it('renders card details correctly', () => {
     render(
       <BrowserRouter>
-        <Card {...mockObj} />
+        <Card product={mockObj} />
       </BrowserRouter>
     );
     const cardImage = screen.getByRole('img');

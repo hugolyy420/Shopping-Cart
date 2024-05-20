@@ -8,7 +8,7 @@ describe('Header', () => {
   it('renders a logo image', () => {
     render(
       <BrowserRouter>
-        <Header />
+        <Header cartItems={[]} />
       </BrowserRouter>
     );
     expect(screen.getByAltText(/home logo/i)).toBeInTheDocument();
@@ -17,7 +17,7 @@ describe('Header', () => {
   it('renders a nav bar', () => {
     render(
       <BrowserRouter>
-        <Header />
+        <Header cartItems={[]} />
       </BrowserRouter>
     );
     expect(screen.getAllByRole('link')).not.toHaveLength(0);
@@ -26,7 +26,7 @@ describe('Header', () => {
   it('renders a home link', () => {
     render(
       <BrowserRouter>
-        <Header />
+        <Header cartItems={[]} />
       </BrowserRouter>
     );
     expect(screen.getByRole('link', { name: 'Home' })).toBeInTheDocument();
@@ -35,7 +35,7 @@ describe('Header', () => {
   it('renders a shop link', () => {
     render(
       <BrowserRouter>
-        <Header />
+        <Header cartItems={[]} />
       </BrowserRouter>
     );
     expect(screen.getByRole('link', { name: 'Shop' })).toBeInTheDocument();
@@ -44,7 +44,7 @@ describe('Header', () => {
   it('renders a cart link', () => {
     render(
       <BrowserRouter>
-        <Header />
+        <Header cartItems={[]} />
       </BrowserRouter>
     );
     expect(screen.getByLabelText('Open Cart')).toBeInTheDocument();
