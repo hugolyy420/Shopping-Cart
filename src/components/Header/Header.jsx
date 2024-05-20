@@ -4,7 +4,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 export const Header = ({ cartItems }) => {
   return (
-    <header className="flex justify-between items-center py-4 px-8">
+    <header className="flex justify-between items-center py-4 px-8 sticky top-0 bg-white shadow-md z-50">
       <Link to="/">
         <div className="w-32 h-16 flex items-center">
           <img src="../../public/default-monochrome.svg" alt="Home Logo" className="object-fill" />

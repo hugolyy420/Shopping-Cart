@@ -7,7 +7,7 @@ const Categories = ({ categories, active, setActive, setItemOffset }) => {
         <li key={index}>
           <Link
             to={`/shop/${category}`}
-            className={`p-2 hover:bg-slate-400 block text-left ${active === category ? 'bg-slate-400' : ''}`}
+            className={`p-2 hover:bg-sky-700 hover:text-slate-50 block text-left rounded-lg transition-colors ${active === category ? 'bg-sky-700 text-slate-50' : ''}`}
             onClick={() => {
               setActive(category);
               setItemOffset(0);

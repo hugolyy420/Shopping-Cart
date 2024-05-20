@@ -1,9 +1,16 @@
 import { useOutletContext } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import './Cart.css';
+import illustrationOne from './Cart-illustration-1.svg';
+import { useEffect } from 'react';
 
 const Cart = () => {
   const { cartItems, setCartItems } = useOutletContext();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }, []);
+
   const total = cartItems.reduce((item, prev) => (item += prev.price * prev.quantity), 0);
   const incrementQuantity = (item) => {
     const temp = [...cartItems];
@@ -61,11 +68,18 @@ const Cart = () => {
   return (
     <section className="max-w-screen-xl mx-auto p-8 min-h-screen">
       {cartItems.length === 0 ? (
-        <div>
-          <h2 className="text-3xl mb-10">Your cart is empty</h2>
-          <Link to="/shop" className="p-4 bg-sky-700 text-slate-50 rounded-lg">
-            Go to Shop
-          </Link>
+        <div className="flex flex-col items-center gap-10 md:flex-row">
+          <div className="flex flex-col">
+            <h2 className="text-3xl mb-10">Your cart is empty</h2>
+            <Link
+              to="/shop"
+              className="p-4 bg-sky-700 text-slate-50 rounded-lg self-center hover:bg-sky-500 transition-colors">
+              Go to Shop
+            </Link>
+          </div>
+          <div>
+            <img src={illustrationOne} alt="" className="size-72 md:size-96" />
+          </div>
         </div>
       ) : (
         <>
@@ -118,7 +132,7 @@ const Cart = () => {
                     <button
                       type="button"
                       onClick={() => removeItem(item)}
-                      className="bg-red-800 text-slate-50 p-2 rounded-lg">
+                      className="bg-red-700 text-slate-50 p-2 rounded-lg hover:bg-red-500 transition-colors">
                       remove
                     </button>
                   </li>
@@ -129,7 +143,9 @@ const Cart = () => {
                   <span className="flex-1">Subtotal:</span>
                   <span className="block">${total}</span>
                 </p>
-                <button type="submit" className="p-4 bg-sky-700 text-slate-50 rounded-lg">
+                <button
+                  type="submit"
+                  className="p-4 bg-sky-700 text-slate-50 rounded-lg hover:bg-sky-500 transition-colors">
                   Checkout
                 </button>
               </div>

@@ -2,7 +2,9 @@ import { Link } from 'react-router-dom';
 
 const Card = ({ product }) => {
   return (
-    <Link to={`/product/${product.id}`} className="shadow-md p-8 flex flex-col gap-2 items-start">
+    <Link
+      to={`/product/${product.id}`}
+      className="p-8 flex flex-col gap-2 items-start border-4 rounded-lg hover:border-sky-800 transition-colors">
       <div className="w-48 md:w-full h-48 self-center">
         <img src={product.thumbnail} alt="Product image" className="w-full h-full object-cover" />
       </div>
@@ -19,7 +21,7 @@ const Card = ({ product }) => {
         </svg>
         {product.rating}
       </p>
-      <p className="font-bold">${product.price}</p>
+      <p className="font-bold text-lg">${product.price}</p>
     </Link>
   );
 };
