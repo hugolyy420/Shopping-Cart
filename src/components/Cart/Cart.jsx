@@ -85,12 +85,12 @@ const Cart = () => {
         <>
           <h2 className="text-4xl font-bold mb-10">Your Cart</h2>
           <form action="">
-            <div className="flex flex-col gap-10 lg:flex-row p-8">
+            <div className="flex flex-col gap-10 xl:flex-row p-8">
               <ul className="flex flex-col gap-24 flex-1">
                 {cartItems.map((item) => (
                   <li
                     key={item.id}
-                    className="grid justify-around grid-cols-3 items-center justify-items-center gap-10 md:grid-cols-5">
+                    className="grid justify-around grid-cols-3 items-center justify-items-center gap-10 lg:grid-cols-5">
                     <Link to={`/product/${item.id}`}>
                       <div className="size-24 md:size-36">
                         <img
@@ -137,7 +137,7 @@ const Cart = () => {
                   </li>
                 ))}
               </ul>
-              <div className="border-t-2 lg:border-t-0 lg:border-l-2 p-8 flex flex-col">
+              <div className="border-t-2 xl:border-t-0 xl:border-l-2 p-8 flex flex-col">
                 <p className="text-2xl font-bold flex gap-8 mb-10">
                   <span className="flex-1">Subtotal:</span>
                   <span className="block">${total}</span>
