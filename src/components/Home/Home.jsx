@@ -6,7 +6,6 @@ import Card from '../Shop/Card';
 
 export const Home = () => {
   const { products, isLoading, error } = useFetch('https://dummyjson.com/products?limit=4');
-
   return (
     <>
       {isLoading && (

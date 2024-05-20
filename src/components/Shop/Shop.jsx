@@ -113,16 +113,6 @@ export const Shop = () => {
                   <option value="des">Price: High to Low</option>
                 </select>
               </label>
-              {/* <Outlet
-                context={{
-                  itemsPerPage: 18,
-                  filteredProducts,
-                  itemOffset,
-                  categories,
-                  setItemOffset,
-                  sortType
-                }}
-              /> */}
               <Pagination
                 itemsPerPage={18}
                 filteredProducts={filteredProducts}
