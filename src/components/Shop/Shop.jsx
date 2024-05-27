@@ -22,7 +22,8 @@ export const Shop = () => {
     const fetchCategories = async () => {
       const response = await fetch('https://dummyjson.com/products/categories', { mode: 'cors' });
       const categories = await response.json();
-      setCategories(categories.sort());
+      const filteredCategories = categories.map((category) => category.slug);
+      setCategories(filteredCategories.sort());
     };
     fetchCategories();
   }, []);
